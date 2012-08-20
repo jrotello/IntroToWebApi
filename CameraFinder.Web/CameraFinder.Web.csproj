@@ -124,14 +124,25 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Api\CameraController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\Api\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Services\ICameraRepository.cs" />
+    <Compile Include="Models\Camera.cs" />
+    <Compile Include="Infrastructure\Services\InMemoryCameraRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Cameras\1dx.gif" />
+    <Content Include="App_Data\Cameras\5d_markii.gif" />
+    <Content Include="App_Data\Cameras\5d_marklll.gif" />
+    <Content Include="App_Data\Cameras\60d.gif" />
+    <Content Include="App_Data\Cameras\7d.gif" />
+    <Content Include="App_Data\Cameras\t2i.gif" />
+    <Content Include="App_Data\Cameras\t3i.gif" />
+    <Content Include="App_Data\Cameras\t4i.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -231,10 +242,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

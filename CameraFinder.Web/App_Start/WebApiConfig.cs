@@ -1,4 +1,6 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web.Http;
+using CameraFinder.Web.Infrastructure.ActionFilters;
 using CameraFinder.Web.Infrastructure.MessageHandlers;
 
 namespace CameraFinder.Web
@@ -8,11 +10,17 @@ namespace CameraFinder.Web
         public static void Register(HttpConfiguration config) {
             ConfigureRoutes(config);
             ConfigureMessageHandlers(config);
+            ConfigureActionFilters(config);
+        }
+
+        private static void ConfigureActionFilters(HttpConfiguration config) {
+            config.Filters.Add(new RequestStatisticsFilter());
         }
 
         private static void ConfigureMessageHandlers(HttpConfiguration config) {
             config.MessageHandlers.Add(new ApiKeyHandler());
             config.MessageHandlers.Add(new ElapsedTimeHandler());
+            config.MessageHandlers.Add(new RequestStatisticsHandler());
         }
 
         private static void ConfigureRoutes(HttpConfiguration config) {

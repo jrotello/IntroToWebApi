@@ -129,6 +129,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\MessageHandlers\ApiKeyHandler.cs" />
+    <Compile Include="Infrastructure\MessageHandlers\ElapsedTimeHandler.cs" />
     <Compile Include="Infrastructure\Services\ICameraRepository.cs" />
     <Compile Include="Models\Camera.cs" />
     <Compile Include="Infrastructure\Services\InMemoryCameraRepository.cs" />

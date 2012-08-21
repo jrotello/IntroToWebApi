@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html> 
+<html> 
+    <head> 
+    <title>Camera Finder</title> 
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <link href="Content/jquery.mobile-1.1.1.min.css" rel="stylesheet" type="text/css" />
+</head> 
+<body> 
+
+<div data-role="page">
+
+    <div data-role="header">
+        <h1>Camera Finder</h1>
+    </div><!-- /header -->
+
+    <div data-role="content">	
+        <ul id="cameras" data-role="listview" data-inset="true" data-filter="true" data-bind="foreach: cameras">
+            <!-- ko if: $root.showDivider($data) -->
+            <li class="ui-li-divider" data-bind="text: Make"></li>
+            <!-- /ko -->
+
+            <li><a href="#">
+                    <img data-bind="attr: { src: $root.getCameraImageUrl($data) }" style="margin-top: 15px;" />
+                    <h3><span data-bind="text: Make"></span> <span data-bind="text: Model"></span></h3>    
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </a></li>
+        </ul>
+        <a href="#" data-bind="click: refreshCameras" data-role="button" data-icon="refresh" data-theme="b">Refresh</a>
+    </div><!-- /content -->
+</div><!-- /page -->
+
+<script src="Scripts/jquery-1.8.0.min.js" type="text/javascript"></script>
+<script src="Scripts/jquery-ui-1.8.23.min.js" type="text/javascript"></script>
+<script src="Scripts/jquery.mobile-1.1.1.min.js" type="text/javascript"></script>
+<script src="Scripts/knockout-2.1.0.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var cameraFinder = {};
+
+    cameraFinder.vm = (function () {
+        var that = this;
+
+        that.cameras = ko.observableArray();
+
+        that.showDivider = function (camera) {
+            if (camera.Make !== that.showDivider.priorMake) {
+                that.showDivider.priorMake = camera.Make;
+                return true;
+            }
+
+            return false;
+        };
+        that.showDivider.priorMake = null;
+
+        that.getCameraImageUrl = function (camera) {
+            if (camera) {
+                return 'api/cameras/' + camera.Id + '?apikey=secret&format=image';
+            }
+        };
+
+        that.refreshCameras = function () {
+            that.showDivider.priorMake = null;
+
+            $.getJSON(
+                'api/cameras?apikey=secret',
+                function (data) {
+                    cameraFinder.vm.cameras(data);
+                }
+            );
+        };
+
+        return that;
+    })();
+
+    $(function () {
+        ko.applyBindings(cameraFinder.vm);
+        cameraFinder.vm.refreshCameras();
+    });
+</script>
+</body>
+</html>

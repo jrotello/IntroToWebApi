@@ -18,7 +18,7 @@ namespace CameraFinder.Web.Infrastructure.Services
         };
 
         public IEnumerable<Camera> Get() {
-            return _database;
+            return _database.OrderBy(camera => camera.Id);
         }
 
         public Camera Get(string id) {

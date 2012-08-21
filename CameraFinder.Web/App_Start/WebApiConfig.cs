@@ -25,6 +25,7 @@ namespace CameraFinder.Web
 
         private static void ConfigureMessageHandlers(HttpConfiguration config) {
             config.MessageHandlers.Add(new ApiKeyHandler());
+            config.MessageHandlers.Add(new FormatSelectionHandler());
             config.MessageHandlers.Add(new ElapsedTimeHandler());
             config.MessageHandlers.Add(new RequestStatisticsHandler());                        
         }
@@ -34,7 +35,7 @@ namespace CameraFinder.Web
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
-                );
+            );
         }
     }
 }

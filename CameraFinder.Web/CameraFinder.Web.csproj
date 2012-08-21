@@ -137,6 +137,7 @@
     <Compile Include="Infrastructure\Extensions\HttpRequestMessageExtensions.cs" />
     <Compile Include="Infrastructure\Formatters\GifFormatter.cs" />
     <Compile Include="Infrastructure\MessageHandlers\ApiKeyHandler.cs" />
+    <Compile Include="Infrastructure\MessageHandlers\FormatSelectionHandler.cs" />
     <Compile Include="Infrastructure\MessageHandlers\RequestStatisticsHandler.cs" />
     <Compile Include="Infrastructure\MessageHandlers\ElapsedTimeHandler.cs" />
     <Compile Include="Infrastructure\Services\ICameraRepository.cs" />
@@ -154,7 +155,7 @@
     <Content Include="App_Data\Cameras\default.gif" />
     <Content Include="App_Data\Cameras\Canon\t2i.gif" />
     <Content Include="App_Data\Cameras\Canon\t3i.gif" />
-    <Content Include="App_Data\Cameras\t4i.gif" />
+    <Content Include="App_Data\Cameras\Canon\t4i.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />

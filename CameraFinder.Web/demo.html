@@ -53,7 +53,7 @@
 
         that.getCameraImageUrl = function (camera) {
             if (camera) {
-                return 'api/cameras/' + camera.Id + '?apikey=secret&format=image';
+                return 'api/cameras/' + camera.Id + '?format=image';
             }
         };
 
@@ -61,7 +61,7 @@
             that.showDivider.priorMake = null;
 
             $.getJSON(
-                'api/cameras?apikey=secret',
+                'api/cameras',
                 function (data) {
                     cameraFinder.vm.cameras(data);
                 }

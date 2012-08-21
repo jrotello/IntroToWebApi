@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web.Http;
 using CameraFinder.Web.Infrastructure.Services;
 using CameraFinder.Web.Models;
@@ -30,7 +32,16 @@ namespace CameraFinder.Web.Controllers.Api
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.OK, camera);
+            var response = Request.CreateResponse(HttpStatusCode.OK, camera);
+
+            var imagesTypes = new List<string> {"image/*", "image/gif"};
+            if (Request.Headers.Accept.Any(header => imagesTypes.Contains(header.MediaType))) {
+                response.Headers.CacheControl = new CacheControlHeaderValue {
+                    MaxAge = TimeSpan.FromSeconds(10)
+                };
+            }
+
+            return response;
         }
 
         // POST api/camera

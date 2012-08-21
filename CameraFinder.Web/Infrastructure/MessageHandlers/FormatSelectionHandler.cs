@@ -28,20 +28,19 @@ namespace CameraFinder.Web.Infrastructure.MessageHandlers {
             return format;
         }
 
+        private readonly Dictionary<string, string> _supportedFormats = new Dictionary<string, string> {
+            {"xml",     "application/xml"},
+            {"gif",     "image/gif"},
+            {"image",   "image/*"},
+            {"json",    "application/json"}
+        };
+
         private MediaTypeWithQualityHeaderValue GetMediaType(string format) {
             string mediaType;
-            switch (format.ToLower()) {
-                case "xml":
-                    mediaType = "application/xml";
-                    break;
-                case "image":
-                    mediaType = "image/*";
-                    break;
-                default: 
-                    mediaType = "application/json";
-                    break;
+            if (!_supportedFormats.TryGetValue(format.ToLower(), out mediaType)) {
+                mediaType = _supportedFormats["json"];
             }
-            
+
             return new MediaTypeWithQualityHeaderValue(mediaType);
         }
     }

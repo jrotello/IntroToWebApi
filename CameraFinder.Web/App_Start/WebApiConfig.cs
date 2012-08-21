@@ -2,6 +2,7 @@
 using System.Web.Http;
 using CameraFinder.Web.Infrastructure.ActionFilters;
 using CameraFinder.Web.Infrastructure.MessageHandlers;
+using CameraFinder.Web.Infrastructure.Formatters;
 
 namespace CameraFinder.Web
 {
@@ -11,6 +12,11 @@ namespace CameraFinder.Web
             ConfigureRoutes(config);
             ConfigureMessageHandlers(config);
             ConfigureActionFilters(config);
+            ConfigureFormatters(config);
+        }
+
+        private static void ConfigureFormatters(HttpConfiguration config) {
+            config.Formatters.Add(new GifFormatter());
         }
 
         private static void ConfigureActionFilters(HttpConfiguration config) {

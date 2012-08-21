@@ -18,6 +18,10 @@
     <UseIISExpress>false</UseIISExpress>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -131,6 +135,7 @@
     </Compile>
     <Compile Include="Infrastructure\ActionFilters\RequestStatisticsFilter.cs" />
     <Compile Include="Infrastructure\Extensions\HttpRequestMessageExtensions.cs" />
+    <Compile Include="Infrastructure\Formatters\GifFormatter.cs" />
     <Compile Include="Infrastructure\MessageHandlers\ApiKeyHandler.cs" />
     <Compile Include="Infrastructure\MessageHandlers\RequestStatisticsHandler.cs" />
     <Compile Include="Infrastructure\MessageHandlers\ElapsedTimeHandler.cs" />
@@ -141,13 +146,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Cameras\1dx.gif" />
-    <Content Include="App_Data\Cameras\5d_markii.gif" />
-    <Content Include="App_Data\Cameras\5d_marklll.gif" />
-    <Content Include="App_Data\Cameras\60d.gif" />
-    <Content Include="App_Data\Cameras\7d.gif" />
-    <Content Include="App_Data\Cameras\t2i.gif" />
-    <Content Include="App_Data\Cameras\t3i.gif" />
+    <Content Include="App_Data\Cameras\Canon\1dx.gif" />
+    <Content Include="App_Data\Cameras\Canon\5dmarkii.gif" />
+    <Content Include="App_Data\Cameras\Canon\5dmarklll.gif" />
+    <Content Include="App_Data\Cameras\Canon\60d.gif" />
+    <Content Include="App_Data\Cameras\Canon\7d.gif" />
+    <Content Include="App_Data\Cameras\default.gif" />
+    <Content Include="App_Data\Cameras\Canon\t2i.gif" />
+    <Content Include="App_Data\Cameras\Canon\t3i.gif" />
     <Content Include="App_Data\Cameras\t4i.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />

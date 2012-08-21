@@ -14,8 +14,7 @@ namespace CameraFinder.Web.Infrastructure.ActionFilters
             }
         }
 
-        public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
-        {
+        public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext) {
             var metadata = actionExecutedContext.Request.GetApiRequestMetaData();
             if (metadata != null) {
                 metadata.ActionEnd = DateTime.UtcNow;

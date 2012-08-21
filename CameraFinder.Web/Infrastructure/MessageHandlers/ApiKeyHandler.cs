@@ -11,7 +11,6 @@ namespace CameraFinder.Web.Infrastructure.MessageHandlers
     {
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken) {
             string apikey = GetApiKeyFromQueryString(request);
-
             if (!IsValidApiKey(apikey)) {
                 var response = request.CreateErrorResponse(HttpStatusCode.Unauthorized, "A valid API key is required.");
                 return Task.Factory.StartNew(() => response);

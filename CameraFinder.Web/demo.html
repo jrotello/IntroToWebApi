@@ -33,24 +33,24 @@
 <!-- Start of first page: #one -->
 <div data-role="page" id="detail">
 
-	<div data-role="header">
-		<h1 data-bind="text: name">Camera Detail</h1>
-	</div><!-- /header -->
+    <div data-role="header">
+        <h1 data-bind="text: name">Camera Detail</h1>
+    </div><!-- /header -->
 
-	<div data-role="content" >	
-		<p><a href="#list" data-role="button" data-rel="back" data-theme="b">Back</a></p>	
-	</div><!-- /content -->
+    <div data-role="content" >	
+        <p><a href="#list" data-role="button" data-rel="back" data-theme="b">Back</a></p>	
+    </div><!-- /content -->
 </div><!-- /page one -->
 
 <!-- Start of first page: #one -->
 <div data-role="page" id="add">
 
-	<div data-role="header">
-		<h1 data-bind="text: name">Camera Detail</h1>
-	</div><!-- /header -->
+    <div data-role="header">
+        <h1 data-bind="text: name">Camera Detail</h1>
+    </div><!-- /header -->
 
-	<div data-role="content" >	
-        <form action="api/cameras" method="post">
+    <div data-role="content" >	
+        <form data-ajax="false" id="addCamera">
             <label for="make">Make:</label>
             <input type="text" name="make" id="make" value="" data-mini="true" />
 
@@ -58,9 +58,9 @@
             <input type="text" name="model" id="model" value="" data-mini="true" />
 
             <p><button type="submit" data-role="button" data-icon="check" data-theme="b">Save</button></p>	
-		    <p><a href="#list" data-role="button" data-icon="delete" data-theme="b">Cancel</a></p>	
+            <p><a href="#list" data-role="button" data-icon="delete" data-theme="b">Cancel</a></p>	
         </form>
-	</div><!-- /content -->
+    </div><!-- /content -->
 </div><!-- /page one -->
 
 <script src="Scripts/jquery-1.8.0.min.js" type="text/javascript"></script>
@@ -89,7 +89,7 @@
     cameraFinder.Camera.prototype.getImageUrl = function () {        
         return 'api/cameras/' + this.id() + '?format=image';
     };
-    
+
     cameraFinder.vm = (function () {
         var that = this;
 
@@ -105,16 +105,18 @@
         };
         this.showDivider.priorMake = null;
 
+        this.addCamera = function (cameraData) {
+            that.cameras.push(new cameraFinder.Camera(cameraData));
+        };
+
         this.refreshCameras = function (newcams) {
-            var index,
-                camera;
+            var index;
 
             newcams = newcams || [];
 
             that.cameras([]);
             for (index = 0; index < newcams.length; index++) {
-                camera = new cameraFinder.Camera(newcams[index]);
-                that.cameras.push(camera);
+                that.addCamera(newcams[index]);
             }
         };
 
@@ -142,6 +144,22 @@
     $(function () {
         ko.applyBindings(cameraFinder.vm, $("#list")[0]);
         cameraFinder.vm.getCamerasFromServer();
+
+        $("#addCamera").submit(function (evt) {
+            evt.preventDefault();
+
+            $.post(
+                "api/cameras",
+                $(this).serialize(),
+                function (data) {
+                    cameraFinder.vm.cameras.push(new cameraFinder.Camera(data));
+                    $.mobile.changePage("#list", { transition: "slideup" });
+                }
+            );
+
+
+
+        });
     });
 </script>
 </body>

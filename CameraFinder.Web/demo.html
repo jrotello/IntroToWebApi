@@ -38,6 +38,7 @@
     </div><!-- /header -->
 
     <div data-role="content" >	
+        <p><a href="#" data-role="button">Edit</a></p>	
         <p><a href="#list" data-role="button" data-rel="back" data-theme="b">Back</a></p>	
     </div><!-- /content -->
 </div><!-- /page one -->
@@ -88,6 +89,12 @@
     };
     cameraFinder.Camera.prototype.getImageUrl = function () {        
         return 'api/cameras/' + this.id() + '?format=image';
+    };
+
+    cameraFinder.resetForm = function (jqForm) {
+        jqForm.each(function () {
+            this.reset();
+        });
     };
 
     cameraFinder.vm = (function () {
@@ -142,10 +149,12 @@
     })();
 
     $(function () {
+        var form = $("#addCamera");
+
         ko.applyBindings(cameraFinder.vm, $("#list")[0]);
         cameraFinder.vm.getCamerasFromServer();
 
-        $("#addCamera").submit(function (evt) {
+        form.submit(function (evt) {
             evt.preventDefault();
 
             $.post(
@@ -154,6 +163,7 @@
                 function (data) {
                     cameraFinder.vm.cameras.push(new cameraFinder.Camera(data));
                     $.mobile.changePage("#list", { transition: "slideup" });
+                    cameraFinder.resetForm(form);
                 }
             );
 
